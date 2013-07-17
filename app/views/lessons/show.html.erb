@@ -1,0 +1,37 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @lesson.name %>
+</p>
+
+<p>
+  <b>Date:</b>
+  <%= @lesson.date %>
+</p>
+
+<p>
+  <b>Start time:</b>
+  <%= @lesson.start_time %>
+</p>
+
+<p>
+  <b>End time:</b>
+  <%= @lesson.end_time %>
+</p>
+
+<p>
+  <b>Classroom:</b>
+  <%= @lesson.classroom %>
+</p>
+
+
+<p>
+  <b>Description:</b>
+  <%= @lesson.description %>
+</p>
+
+<% if can? :edit, @lesson %>
+  <%= link_to 'Edit', edit_lesson_path(@lesson) %> |
+<% end %>
+<%= link_to 'Back', lessons_path %>

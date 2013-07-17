@@ -1,0 +1,30 @@
+<h3>CLASSROOMS</h3>
+
+
+<%= search_form_for @q, url: search_path, html: {:method => :post} do |f| %>
+<p>
+<%= f.label :classroom_name_start %>
+<%= f.text_field :classroom_name_start %>
+</p>
+<p>
+    <%= f.submit %>
+  </p>
+<% end %>
+
+
+
+<ol>
+<% @classrooms.each do |classroom| %>
+<li><h4><%= link_to classroom.name, classroom_path(classroom) %></h4>
+</li>
+<br>
+<%= link_to 'Show', classroom%>
+<%= link_to 'edit', edit_classroom_path(classroom) %> 
+<%= link_to 'delete', classroom, method: :delete, data: { confirm: 'Are you sure?' } %>
+<br>
+<br>
+<% end %>
+</ol>
+<%= link_to 'Home', root_path %>
+<%= link_to 'New', new_classroom_path %> 
+<br>

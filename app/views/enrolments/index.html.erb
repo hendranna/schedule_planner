@@ -1,0 +1,16 @@
+<h4>Listing enrolments</h4>
+
+
+<h5>You are registred at this course <%= course.name %></h5>
+<ul>
+	<% @enrolments.each do |enrolment| %>
+	<li><%= link_to enrolment %>
+
+   <%= link_to 'Destroy', enrolment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+
+<% end %>
+
+<br>
+
+<%= link_to 'New Enrolment', new_enrolment_path %>
+<br>

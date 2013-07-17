@@ -1,0 +1,57 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @course.name %>
+</p>
+
+<p>
+  <b>Date start:</b>
+  <%= @course.date_start %>
+</p>
+
+<p>
+  <b>Date end:</b>
+  <%= @course.date_end %>
+</p>
+
+<p>
+  <b>Language:</b>
+  <%= @course.language %>
+</p>
+
+<p>
+  <b>Cost:</b>
+  <%= @course.cost %>
+</p>
+
+<p>
+  <b>Availability:</b>
+  <%= @course.availability %>
+</p>
+
+<p>
+  <b>Teacher:</b>
+  <%= @course.enrolments.where(involvement: 'teacher').map { |x| x.user.first_name }.to_sentence %>
+
+
+<p>
+  <b>Students:</b>
+  <%= @course.enrolments.where(involvement: nil).map { |x| x.user.first_name }.to_sentence %>
+</p>
+
+<% if can? :edit, @course %>
+  <%= link_to 'Edit', edit_course_path(@course) %> |
+<% end %>
+<%= link_to 'Back', course_path %>
+
+<% if @course.users.include?(@user) %>
+    <% link_to 'Delete me from this course', @course.enrolment.where(user_id: @user_id).first, method: :delete, data: {confirm: 'Are you sure?'} %>
+
+    <% else %>
+    <% link_to 'Register me for this course', course_path(course_id: @course.id) %>
+  <% end %>
+
+
+
+

@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  date_start: MyString
+  date_end: MyString
+  language: MyString
+  cost: 1.5
+  teacher: MyString
+  availability: false
+
+two:
+  name: MyString
+  date_start: MyString
+  date_end: MyString
+  language: MyString
+  cost: 1.5
+  teacher: MyString
+  availability: false
