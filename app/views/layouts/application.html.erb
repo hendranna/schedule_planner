@@ -6,19 +6,21 @@
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
-<body>
-
-	<br>
-   <% if current_user %>
-      <p> Welcome, <%= current_user.username %></p>
-  <br>
-  
-  <%= link_to 'Logout', session_path(session), method: :delete, data: {confirm: 'Are you sure?'} %><br>
-    <% else %>
-      <%= link_to ' Please login', login_path %><br>
-      <%= link_to ' Please register', new_user_path %>
-  <%end%>
-  <br>
+<body class="<%= controller.class.to_s.downcase %>">
+  <div class="navbar">
+  <div class="navbar-inner">
+    <a class="brand" href="/">General scheduler</a>
+    <ul class="nav">
+      <li><%= link_to "Courses", courses_path%></li>
+      <% if current_user %>
+      <li><%= link_to 'Logout', session_path(session), method: :delete, data: {confirm: 'Are you sure?'} %></li>
+      <% else %>
+      <li><%= link_to ' Sign up', new_user_path %></li>
+      <li><%= link_to 'Log in', login_path %></li>
+      <% end %>
+    </ul>
+  </div>
+</div>
 
   <% flash.each do |name, message| %>
   <div class='flash-message flash-message- <%= name %>'>
@@ -26,13 +28,14 @@
   </div>
     <%end%>
 
-    <nav>
-    	<ul>
-    		<li><%= link_to 'Courses', courses_path(@courses) %></li>
-    	</ul>
-    </nav>
+   
 
+   <div class="container">
+   <% if current_user %>
+      <p> Welcome, <%= current_user.username %></p>
+    <% end %>
 <%= yield %>
 
+  </div>
 </body>
 </html>

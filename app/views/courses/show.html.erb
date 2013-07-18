@@ -1,5 +1,7 @@
 <p id="notice"><%= notice %></p>
 
+<li> <%= image_tag @course.course_image.detail.url %> </li>
+
 <p>
   <b>Name:</b>
   <%= @course.name %>
@@ -37,20 +39,44 @@
 
 <p>
   <b>Students:</b>
-  <%= @course.enrolments.where(involvement: nil).map { |x| x.user.first_name }.to_sentence %>
+  <%= @course.enrolments.where(involvement: 'student').map { |x| x.user.first_name }.to_sentence %>
 </p>
+
+<h5>Enrolments for <%= @course.name %></h5>
+      <%= link_to 'Register', new_enrolment_path(course_id: @course.id) if (@course.availability == true and (@course.users.size < 10)) %>
+      <h5>Students already registred in  <%= @course.name %> @course </h5>
+      <% if current_user.role == "teacher" %>
+        <% @course.users.each do |user| %>
+          <% if user.role == "student" %>
+            <ul>
+              <li><%= link_to user.username, user %></li>
+            </ul>
+          <% end %> 
+        <% end %>
+      <% end %>
+
+            <h5>Lessons for <%= @course.name %></h5>
+      <ul>
+        <% @course.lessons.each do |lesson| %>
+          <li><%= link_to lesson.name, lesson %>
+            (
+            <%= link_to 'Edit', edit_lesson_path(@course) %> 
+            <%= link_to 'Delete', lesson, method: :delete, data: { confirm: 'Are you sure?' } %>
+            )   
+          </li>
+        <% end %>
+          
+      </ul>
+      <%= link_to 'New Lesson', new_lesson_path(course_id: @course.id) %>
+      <br>
+
 
 <% if can? :edit, @course %>
   <%= link_to 'Edit', edit_course_path(@course) %> |
 <% end %>
-<%= link_to 'Back', course_path %>
+<%= link_to 'Back', @course_path %>
 
-<% if @course.users.include?(@user) %>
-    <% link_to 'Delete me from this course', @course.enrolment.where(user_id: @user_id).first, method: :delete, data: {confirm: 'Are you sure?'} %>
 
-    <% else %>
-    <% link_to 'Register me for this course', course_path(course_id: @course.id) %>
-  <% end %>
 
 
 

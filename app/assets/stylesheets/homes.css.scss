@@ -1,3 +1,19 @@
 // Place all the styles related to the homes controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+body {
+	background-size: cover;
+}
+
+body.homecontroller {
+	background-image: image-url('images_3.jpg');
+}
+
+body.coursescontroller {
+	background-image: image-url('images_11.jpg');
+}
+
+body.lessonscontroller {
+	background-image: image-url('images_7.jpg');
+}

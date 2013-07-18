@@ -20,6 +20,7 @@ class Ability
 			
 		else
 			can :search, Course
+			can :create, User
 		end
 
 

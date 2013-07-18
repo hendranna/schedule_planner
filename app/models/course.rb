@@ -1,5 +1,8 @@
 class Course < ActiveRecord::Base
-  attr_accessible :availability, :cost, :date_end, :date_start, :language, :name
+  attr_accessible :availability, :cost, :date_end, :date_start, :language, :name, :course_image
+
+	mount_uploader :course_image, CourseImageUploader
+
 
   has_many :enrolments
   has_many :users, through: :enrolments
@@ -9,7 +12,6 @@ class Course < ActiveRecord::Base
   validates :cost, numericality: true
   validates :date_start, presence: true
   validates :date_end, presence: true
-  validates :availability, presence: true
   validates :language, presence: true
 
   

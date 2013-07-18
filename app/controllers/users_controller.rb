@@ -2,14 +2,21 @@ class UsersController < ApplicationController
  
  load_and_authorize_resource
 
- def search
-   @q = User.search(params[:q])
-   @users = @q.result(:distinct => true)
-
+def index
+    @q = User.search(params[:q])
+    @users = @q.result(:distinct => true)
+    @users = User.all
+    
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @courses }
+    end
   end
-  
-  def index 
-  @users = User.all
+
+
+  def search
+    index 
+    render :index
   end
 
   def new
@@ -19,8 +26,10 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(params[:user])
+    @user.role = 'student'
     if @user.save
-      redirect_to users_path
+      session[:user_id] = @user.id
+      redirect_to root_path
   else
     render 'new'
   end

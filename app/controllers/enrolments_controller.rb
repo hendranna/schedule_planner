@@ -44,13 +44,15 @@ class EnrolmentsController < ApplicationController
     @enrolment = Enrolment.new(params[:enrolment])
     @course = Course.find(params[:course_id])
     @enrolment.course = @course
-  
+    @enrolment.user = current_user
     respond_to do |format|
-      if @enrolment.save
+      if @enrolment.valid?
+        @enrolment.save
         format.html { redirect_to @enrolment, notice: 'Enrolment was successfully created.' }
         format.json { render json: @enrolment, status: :created, location: @enrolment }
       else
-        format.html { render action: "new" }
+
+        format.html { render action: "new" , alert: @enrolment.errors}
         format.json { render json: @enrolment.errors, status: :unprocessable_entity }
       end
     end

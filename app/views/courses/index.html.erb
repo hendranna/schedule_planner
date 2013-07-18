@@ -1,6 +1,5 @@
 <h3>COURSES</h3>
 
-
 <%= search_form_for @q do |f| %>
 	<p>
 		<%= f.label :name_start %>
@@ -12,42 +11,22 @@
 <% end %>
 
 
+
 <ol>
-<% @courses.each do |course| %>
-<li><h4><%= link_to course.name, course_path(course) %></h4>
-
-
-	<h5>Enrolments for <%= course.name %></h5>
-	
-			<%= link_to 'Register', new_enrolment_path(course_id: course.id) %>
-</li>
-
-	
-	
-
-	<h5>Lessons for <%= course.name %></h5>
-	<ul>
-		<% course.lessons.each do |lesson| %>
-			<li><%= link_to lesson.name, lesson %>
-				<%= link_to 'Edit', edit_lesson_path(course) %> 
-				<%= link_to 'Delete', lesson, method: :delete, data: { confirm: 'Are you sure?' } %>
-				</li>
-			<% end %>
+	<% @courses.each do |course| %>
+		<li>
+			<h4><%= link_to course.name, course_path(course) %></h4>
 			
-	</ul>
-				<%= link_to 'New Lesson', new_lesson_path(course_id: course.id) %>
-</li>
-<br>
- 	<%= link_to 'Show', course %>
- 	<%= link_to 'Edit', edit_course_path(course) %> 
-    <%= link_to 'Destroy', course, method: :delete, data: { confirm: 'Are you sure?' } %>
-				
+			(
+		 	<%= link_to 'Show', course %>
+		 	<%= link_to 'Edit', edit_course_path(course) %> 
+		  <%= link_to 'Destroy', course, method: :delete, data: { confirm: 'Are you sure?' } %>
+			)	
 
-			<% end %>
-
+		<% end %>
+	</li>
 </ol>
 			<%= link_to 'Home', root_path %>
 			<%= link_to 'New Course', new_course_path %> 
-
 
 <br>

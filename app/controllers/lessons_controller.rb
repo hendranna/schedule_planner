@@ -4,19 +4,19 @@ class LessonsController < ApplicationController
 
 load_and_authorize_resource
 
-def search
-   @q = Lesson.search(params[:q])
-   @lessons = @q.result(:distinct => true)
-
-  end
-  
-  def index
-    @lessons = Lesson.all
-
+def index
+    @q = Lesson.search(params[:q])
+    @lessons = @q.result(:distinct => true)
     respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @lessons }
+    format.html # index.html.erb
+    format.json { render json: @lessons }
     end
+  end
+
+
+  def search
+    index 
+    render :index
   end
 
   # GET /lessons/1
