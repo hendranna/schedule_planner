@@ -10,7 +10,7 @@ validates :name, presence: true, uniqueness: true
 validates :date, presence: true
 validates :description, presence: true,length:{in:(6..140)}
 validates :classroom, presence: true
-
+validates :course, presence: true
 
 
 end

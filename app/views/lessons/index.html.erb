@@ -1,19 +1,19 @@
 <h3>LESSONS</h3>
-
 <%= search_form_for @q do |f| %>
-	<p>
-		<%= f.label :name_start %>
-		<%= f.text_field :name_start %>
-	</p>
-	<p>
-    	<%= f.submit %>
-  	</p>
+   <p>
+    <%= f.label :name_start %>
+    <%= f.text_field :name_start %>
+   </p>
+   <p>
+     <%= f.submit %>
+   </p>
 <% end %>
 
 
 <ol>
-<% @lessons.each do |lesson| %>
-<li><h4><%= link_to lesson.name, lesson_path(lesson) %></h4>
+	<% @lessons.each do |lesson| %>
+<li>
+	<h4><%= link_to lesson.name, lesson_path(lesson) %></h4>
 
 	<%= link_to 'Show', lesson %>
 	<%= link_to 'Edit', edit_lesson_path(lesson) %> 
@@ -21,7 +21,8 @@
 	<br>
 	<br>
 	<% end %>
-	</ol>
+	<br>
+</ol>
 	<%= link_to 'Home', root_path %>
 	<%= link_to 'New Lesson', new_lesson_path %> 
 	<br>

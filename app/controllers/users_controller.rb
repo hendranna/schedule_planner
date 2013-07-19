@@ -6,7 +6,7 @@ def index
     @q = User.search(params[:q])
     @users = @q.result(:distinct => true)
     @users = User.all
-    
+    flash.now[:alert] = "No corresponding user" if @userss.size == 0
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @courses }

@@ -8,6 +8,7 @@ def index
     @q = Lesson.search(params[:q])
     @lessons = @q.result(:distinct => true)
     respond_to do |format|
+      flash.now[:alert] = "No corresponding lesson" if @lessons.size == 0
     format.html # index.html.erb
     format.json { render json: @lessons }
     end
@@ -45,6 +46,7 @@ def index
   # GET /lessons/1/edit
   def edit
     @lesson = Lesson.find(params[:id])
+    @course = @lesson.course
   end
 
   # POST /lessons
@@ -69,7 +71,7 @@ def index
   # PUT /lessons/1.json
   def update
     @lesson = Lesson.find(params[:id])
-
+    @course = @lesson.course
     respond_to do |format|
       if @lesson.update_attributes(params[:lesson])
         format.html { redirect_to @lesson, notice: 'Lesson was successfully updated.' }

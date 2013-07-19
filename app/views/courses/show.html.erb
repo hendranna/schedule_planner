@@ -1,74 +1,82 @@
 <p id="notice"><%= notice %></p>
 
-<li> <%= image_tag @course.course_image.detail.url %> </li>
+<div class="row">
+  <div class="span3">
+    <%= image_tag @course.course_image.detail.url %> 
+  </div>
+  <div class="span9">
+    <p>
+      <b>Name:</b>
+      <%= @course.name %>
+    </p>
 
-<p>
-  <b>Name:</b>
-  <%= @course.name %>
-</p>
+    <p>
+      <b>Date start:</b>
+      <%= @course.date_start %>
+    </p>
 
-<p>
-  <b>Date start:</b>
-  <%= @course.date_start %>
-</p>
+    <p>
+      <b>Date end:</b>
+      <%= @course.date_end %>
+    </p>
 
-<p>
-  <b>Date end:</b>
-  <%= @course.date_end %>
-</p>
+    <p>
+      <b>Language:</b>
+      <%= @course.language %>
+    </p>
 
-<p>
-  <b>Language:</b>
-  <%= @course.language %>
-</p>
+    <p>
+      <b>Cost:</b>
+      <%= @course.cost %>
+    </p>
 
-<p>
-  <b>Cost:</b>
-  <%= @course.cost %>
-</p>
+    <p>
+      <b>Availability:</b>
+      <%= @course.availability %>
+    </p>
 
-<p>
-  <b>Availability:</b>
-  <%= @course.availability %>
-</p>
-
-<p>
-  <b>Teacher:</b>
-  <%= @course.enrolments.where(involvement: 'teacher').map { |x| x.user.first_name }.to_sentence %>
-
-
-<p>
-  <b>Students:</b>
-  <%= @course.enrolments.where(involvement: 'student').map { |x| x.user.first_name }.to_sentence %>
-</p>
-
-<h5>Enrolments for <%= @course.name %></h5>
-      <%= link_to 'Register', new_enrolment_path(course_id: @course.id) if (@course.availability == true and (@course.users.size < 10)) %>
-      <h5>Students already registred in  <%= @course.name %> @course </h5>
-      <% if current_user.role == "teacher" %>
-        <% @course.users.each do |user| %>
-          <% if user.role == "student" %>
-            <ul>
-              <li><%= link_to user.username, user %></li>
-            </ul>
-          <% end %> 
-        <% end %>
+    <p>
+      <% if @course.enrolments.where(involvement: 'teacher').size > 0 %>
+      <b>Teacher:</b>
+      <%= @course.enrolments.where(involvement: 'teacher').map { |x| x.user.first_name }.to_sentence %>
       <% end %>
-
-            <h5>Lessons for <%= @course.name %></h5>
-      <ul>
-        <% @course.lessons.each do |lesson| %>
-          <li><%= link_to lesson.name, lesson %>
-            (
-            <%= link_to 'Edit', edit_lesson_path(@course) %> 
-            <%= link_to 'Delete', lesson, method: :delete, data: { confirm: 'Are you sure?' } %>
-            )   
-          </li>
+    <p>
+      <% if @course.enrolments.where('involvement != ? OR involvement IS NULL', 'teacher').size > 0 %>
+      <b>Students:</b>
+      <%= @course.enrolments.where('involvement != ? OR involvement IS NULL', 'teacher').map { |x| x.user.first_name }.to_sentence %>
+      <% end %>
+    </p>
+  </div>
+</div>
+  <% if can? :show, @enrolments %>
+ <!--  <h5>Enrolments for <%= @course.name %></h5> -->
+        <%= link_to 'Register for this course', new_enrolment_path(course_id: @course.id) if (@course.availability == true and (@course.users.size < 10)) %>
+        <h5>Students already registred in  <%= @course.name %> @course </h5>
+        <% if current_user.role == "teacher" %>
+          <% @course.users.each do |user| %>
+            <% if user.role == "student" %>
+              <ul>
+                <li><%= link_to user.username, user %></li>
+              </ul>
+            <% end %> 
+          <% end %>
         <% end %>
-          
-      </ul>
-      <%= link_to 'New Lesson', new_lesson_path(course_id: @course.id) %>
-      <br>
+       <% end %>
+
+              <h5>Lessons for <%= @course.name %> course</h5>
+        <ul>
+          <% @course.lessons.each do |lesson| %>
+            <li><%= link_to lesson.name, lesson %>
+              (
+              <%= link_to 'Edit', edit_lesson_path(@course) %> 
+              <%= link_to 'Delete', lesson, method: :delete, data: { confirm: 'Are you sure?' } %>
+              )   
+            </li>
+          <% end %>
+            
+        </ul>
+        <%= link_to 'New Lesson', new_lesson_path(course_id: @course.id) %>
+        <br>
 
 
 <% if can? :edit, @course %>

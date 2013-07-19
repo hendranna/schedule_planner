@@ -8,7 +8,7 @@ class CoursesController < ApplicationController
     @q = Course.search(params[:q])
     @courses = @q.result(:distinct => true)
     @users = User.all
-    flash.now[:alert] = "No corresponding courses" if @courses.size == 0
+    flash.now[:alert] = "No corresponding course" if @courses.size == 0
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @courses }
