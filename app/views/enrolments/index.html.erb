@@ -5,6 +5,7 @@
 	<% @enrolments.each do |enrolment| %>
 	<li><%= link_to "| #{enrolment.user.username} subscribed to #{enrolment.course.name} |", enrolment %>
 
+<% if can? :delete, @enrolment %>		
    <%= link_to 'Destroy', enrolment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
 
 <% end %>
