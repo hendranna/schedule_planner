@@ -64,4 +64,23 @@ PlanApp::Application.configure do
   # Log the query plan for queries taking more than this (works
   # with SQLite, MySQL, and PostgreSQL)
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
+
+  #AWS
+
+  CarrierWave.configure do |config|
+  config.storage = :fog
+  config.fog_credentials = {
+    :provider               => 'AWS',                        # required
+    :aws_access_key_id      => 'AKIAINI36Y3KOAUO24QQ',                        # required
+    :aws_secret_access_key  => '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',                        # required
+    :region                 => 'eu-west-1',                  # optional, defaults to 'us-east-1'
+    :host                   => 's3.example.com',             # optional, defaults to nil
+    :endpoint               => 'https://s3.example.com:8080' # optional, defaults to nil
+  }
+  config.fog_directory  = 'scheduleplanner'                     # required
+  config.fog_public     = false                                   # optional, defaults to true
+  config.fog_attributes = {'Cache-Control'=>'max-age=315576000'}  # optional, defaults to {}
+end
+
+
 end
