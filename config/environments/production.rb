@@ -73,7 +73,7 @@ PlanApp::Application.configure do
     :provider               => 'AWS',                        # required
     :aws_access_key_id      => 'AKIAINI36Y3KOAUO24QQ',                        # required
     :aws_secret_access_key  => '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',                        # required
-    :region                 => 'Ireland'                  # optional, defaults to 'us-east-1'
+    :region                 => 'eu-west-1'                  # optional, defaults to 'us-east-1'
     # :host                   => 's3.example.com',             # optional, defaults to nil
     # :endpoint               => 'https://s3.example.com:8080' # optional, defaults to nil
   }
