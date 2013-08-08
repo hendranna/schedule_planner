@@ -12,9 +12,9 @@ CarrierWave.configure do |config|
  
     # Configuration for Amazon S3
     :provider              => 'AWS',
-    :aws_access_key_id     => ENV['AKIAINI36Y3KOAUO24QQ'],
-    :aws_secret_access_key => ENV['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'],
-    :region                => ENV['Ireland']
+    :aws_access_key_id     => 'AKIAINI36Y3KOAUO24QQ',
+    :aws_secret_access_key => '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',
+    :region                => 'Ireland'
   }
  
   # For testing, upload files to local `tmp` folder.
@@ -28,7 +28,7 @@ CarrierWave.configure do |config|
  
   config.cache_dir = "#{Rails.root}/tmp/uploads"                  # To let CarrierWave work on heroku
  
-  config.fog_directory    = ENV['scheduleplanner']
-  # config.s3_access_policy = :public_read                          # Generate http:// urls. Defaults to :authenticated_read (https://)
+  config.fog_directory    = 'scheduleplanner'
+  config.s3_access_policy = :public_read                          # Generate http:// urls. Defaults to :authenticated_read (https://)
   # config.fog_host         = "#{ENV['s3-website-eu-west-1.amazonaws.com']}/#{ENV['scheduleplanner']}"
 end
