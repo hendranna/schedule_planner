@@ -51,7 +51,7 @@
   <% if can? :show, @enrolments %>
  <!--  <h5>Enrolments for <%= @course.name %></h5> -->
         <%= link_to 'Register for this course', new_enrolment_path(course_id: @course.id) if (@course.availability == true and (@course.users.size < 10)) %>
-        <h5>Students already registred in  <%= @course.name %> @course </h5>
+        <h5>Students already registred in  <%= @course.name %> course </h5>
         <% if current_user.role == "teacher" %>
           <% @course.users.each do |user| %>
             <% if user.role == "student" %>
