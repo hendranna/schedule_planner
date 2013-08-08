@@ -9,6 +9,7 @@ gem 'cancan'
 gem 'carrierwave'
 gem 'rmagick'
 gem 'ransack'
+gem 'fog', '~> 1.0.0'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
